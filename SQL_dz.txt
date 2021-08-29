@@ -37,6 +37,40 @@ __________________________________________________________________________
 Задание: 6 (Serge I: 2002-09-30)
 Для каждого производителя, выпускающего ПК-блокноты c объёмом жесткого диска не менее 10 Гбайт, найти скорости таких ПК-блокнотов. Вывод: производитель, скорость.
 ______
+SELECT DISTINCT maker, speed
+FROM laptop INNER JOIN
+Product ON Product.model = Laptop.model 
+AND hd>=10
+__________________________________________________________________________
+Задание: 7 (Serge I: 2002-11-02)
+Найдите номера моделей и цены всех имеющихся в продаже продуктов (любого типа) производителя B (латинская буква).
+_______
+Select pc.model , pc.price 
+from pc inner join product 
+on pc.model = product.model  
+where product.maker= 'B' 
+union
 
+Select laptop.model , laptop.price  
+from laptop inner join product 
+on laptop.model = product.model  
+where product.maker= 'B' 
+union 
+
+Select printer.model , printer.price 
+from printer inner join product 
+on printer.model = product.model  
+where product.maker= 'B'
+______________________________________________________________________________
+Задание: 8 (Serge I: 2003-02-03)
+Найдите производителя, выпускающего ПК, но не ПК-блокноты.
+_______
+Select distinct maker
+from Product
+where type='PC' and maker not in (
+Select maker
+from Product
+where type='Laptop')
+_______________________________________________________________________________
 
 
