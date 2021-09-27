@@ -168,4 +168,35 @@ group by product.maker
 having count (distinct model) >= 3
 ___________________________________________________________________________________
 
+Задание: 21 (Serge I: 2003-02-13)
+Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC.
+Вывести: maker, максимальная цена.
+___________
+Select maker , max(price)
+from pc inner join product 
+on pc.model= product.model
+group by maker
+___________________________________________________________________________________
+Задание: 22 (Serge I: 2003-02-13)
+Для каждого значения скорости ПК, превышающего 600 МГц, определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.
+___________
+Select speed, avg (price)
+from pc 
+where speed>600
+group by speed
+___________________________________________________________________________________
+Задание: 23 (Serge I: 2003-02-14)
+Найдите производителей, которые производили бы как ПК
+со скоростью не менее 750 МГц, так и ПК-блокноты со скоростью не менее 750 МГц.
+Вывести: Maker
+___________
+Select distinct maker
+from pc join product
+on pc.model=product.model
+where speed>=750
+and maker in
+(Select distinct maker
+from laptop join product
+on laptop.model=product.model
+where speed>=750)
 
